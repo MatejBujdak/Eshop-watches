@@ -249,7 +249,6 @@ class Menu
     //Zobrazovanie položiek košíka
     public function order(int $customerID)
     {
-
         try{ 
             $sql = "SELECT * FROM shopping_card inner join products on products.item_id = shopping_card.item_id WHERE IdCustomers = $customerID";
             $query = $this -> connection -> query($sql);
@@ -277,6 +276,27 @@ class Menu
             die();
         }  
     
+    }
+
+    //contact formular
+    public function contact(string $name, string $phone_number, string $email, string $message): bool
+    {
+        try{
+            $sql = "INSERT INTO contacts (name, phone_number, email, message) VALUES (:name, :phone_number, :email, :message)";
+            $statement = $this->connection->prepare($sql);
+            $statement->bindValue(':name', $name);
+            $statement->bindValue(':phone_number', $phone_number);
+            $statement->bindValue(':email', $email);
+            $statement->bindValue(':message', $message);
+            $accepted_form = $statement->execute();
+            return $accepted_form;
+            
+        }catch (\Exception $exception) {
+            echo "Chyba vo funkcii contact";
+            die();
+        }
+
+
     }
 
 }

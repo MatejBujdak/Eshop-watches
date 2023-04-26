@@ -42,6 +42,10 @@ $customer = $menu -> info($_SESSION["id"]);
       echo "<h3>Celková suma: ". $total_prize . " € </h3>";
       echo "<p>Vaša adresa zásielky je : ". $customer['adresa'] ." </p>";  
     
+      if(isset($_GET['order'])){
+        echo "Tvoja objednavka bola úspešná!";
+      }
+      
       ?>
 
     <form action="order.php" method="post">

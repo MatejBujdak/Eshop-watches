@@ -1,9 +1,9 @@
 
 <?php
-    $page = basename($_SERVER['PHP_SELF']);
+    $page = basename($_SERVER['PHP_SELF']);   //premenná na ziskanie poslednej zložky v url adrese
 ?>
-
-<div class="hero_area">
+<body <?php echo $page === 'about.php' || $page === 'products.php' || $page === 'contact.php' ? 'class="sub_page"' : '' ?>>
+  <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
@@ -21,16 +21,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
 
-              <li <?php echo $page === 'home' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
+              <li <?php echo $page === 'index.php' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
                 <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li> 
-              <li <?php echo $page === 'about' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
+              <li <?php echo $page === 'about.php' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
                 <a class="nav-link" href="about.php">About</a>
               </li>
-              <li <?php echo $page === 'products' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
+              <li <?php echo $page === 'products.php' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
                 <a class="nav-link" href="products.php">Products</a>
               </li>
-              <li <?php echo $page === 'contact' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
+              <li <?php echo $page === 'contact.php' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
                 <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
 
@@ -52,5 +52,7 @@
         </nav>
       </div>
     </header>
-    <!-- end header section -->
+  <!-- end header section -->
 
+  <?php $page === 'about.php' || $page === 'contact.php' || $page = 'products.php' ? "</div>" : "" ?>
+  

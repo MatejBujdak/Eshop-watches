@@ -11,7 +11,7 @@ if(isset($_POST['order'])){
 
     $menu->order($_SESSION["id"]);
 
-    header("Location: card.php");
+    header("Location: card.php?order=1");
 }
 
 ?>

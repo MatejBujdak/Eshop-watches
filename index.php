@@ -1,17 +1,12 @@
 <?php 
-    include "parts/head.php";
-?>
-
-<body>
-
-<?php 
-    include "parts/navigation.php";
-    
-    if(isset($_SESSION['email_created']) && $_SESSION['email_created'] == true){
-      echo
-    "<script> alert('Bol si prihlásený k odberu noviniek!'); </script>";
-    $_SESSION['email_created'] = false;
-    }
+  include "parts/head.php";
+  include "parts/navigation.php";
+  
+  if(isset($_SESSION['email_created']) && $_SESSION['email_created'] == true){
+    echo
+  "<script> alert('Bol si prihlásený k odberu noviniek!'); </script>";
+  $_SESSION['email_created'] = false;
+  }
 ?>
 
 
@@ -229,94 +224,10 @@
 
   <!-- end service section -->
 
-
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="img_container">
-            <div class="img-box b1">
-              <img src="images/a-1.jpg" alt="">
-            </div>
-            <div class="img-box b2">
-              <img src="images/a-2.jpg" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <h2>
-              About Our Shop
-            </h2>
-            <p>
-              There are many variations of passages of Lorem Ipsum
-              There are many variations of
-              passages of Lorem Ipsum
-            </p>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end about section -->
-
-
-  <!-- product section -->
      
 <?php
+include "parts/about.php";
 include "parts/watches.php";
-?>
-
-
-  <!-- contact section -->
-  <section class="contact_section layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Contact Us
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form_container">
-            <form action="">
-              <div>
-                <input type="text" placeholder="Your Name" />
-              </div>
-              <div>
-                <input type="text" placeholder="Phone Number" />
-              </div>
-              <div>
-                <input type="email" placeholder="Email" />
-              </div>
-              <div>
-                <input type="text" class="message-box" placeholder="Message" />
-              </div>
-              <div class="btn_box">
-                <button>
-                  SEND
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6 ">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end contact section -->
-
-<?php
+include "parts/contact.php";
 include "parts/footer.php";
 ?>
