@@ -110,12 +110,13 @@
             <h5>
               Newsletter
             </h5>
-            <form action="">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                Subscribe
-              </button>
+
+            <!-- NEWSLETTER -->
+            <form action="php/newsletter.php" method="post">
+              <input type="email" placeholder="Enter your email" name="email">
+              <button type="submit" name="submit">Subscribe </button>
             </form>
+
             <div class="social_box">
               <a href="">
                 <img src="images/fb.png" alt="">

@@ -1,6 +1,7 @@
 <?php
 
 include "php/databaze.php";
+include "parts/head.php";
 
 use main\Menu;
 
@@ -24,7 +25,8 @@ else{
     <title>Index</title>
   </head>
   <body>
-  <a href="index.php">home</a>
+  <a href="index.php">home</a> / <a href="products.php">products</a>
+
     <h2>Meno: <?php echo $result["name"]; ?></h2>
     <h2>Email: <?php echo $result["email"]; ?></h2>
     <a href="logout.php">logout</a>

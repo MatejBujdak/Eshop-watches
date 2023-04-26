@@ -1,6 +1,7 @@
 <?php
 
 include "php/databaze.php";
+include "parts/head.php";
 
 use main\Menu;
 
@@ -12,6 +13,7 @@ if(!empty($_SESSION["id"])){
 if(isset($_POST["submit"])){
   $name = $_POST["name"];
   $email = $_POST["email"];
+  $menu -> newsletter($email);
   $password = $_POST["password"];
   $confirmpassword = $_POST["confirmpassword"];
 
@@ -46,7 +48,7 @@ if(isset($_POST["submit"])){
   </head>
   <body>
     <h2>Registration</h2>
-    <a href="index.php">home</a>
+    <a href="index.php">home</a>/<a href="products.php">products</a>
     <form class="" action="" method="post" autocomplete="off">
       <label for="name">Name : </label>
       <input type="text" name="name" id = "name" required value=""> <br>

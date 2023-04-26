@@ -8,7 +8,7 @@ use main\Menu;
 $menu = new Menu();
 
 if(isset($_GET['item_id'])){
-    $menu->add($_SESSION['id'],$_GET['item_id']);
+    $menu->delete($_SESSION['id'],$_GET['item_id']);
     header("Location: card.php");
 }
 

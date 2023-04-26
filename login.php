@@ -16,7 +16,7 @@ if(isset($_POST["submit"])){
   $nameemail = $_POST["nameemail"];
   $password = $_POST["password"];
 
-  $result = $menu->auth($nameemail);
+  $result = $menu->login($nameemail);
 
   if(!empty($result)){
     if($password == $result['password']){
@@ -28,6 +28,7 @@ if(isset($_POST["submit"])){
     else{
       echo
       "<script> alert('Wrong Password'); </script>";
+      
     }
   }
   else{
@@ -39,8 +40,8 @@ if(isset($_POST["submit"])){
 
   <body>
     <h2>Login</h2>
-    <a href="index.php">home</a>
-    <form class="" action="" method="post" autocomplete="off">
+    <a href="index.php">home</a> / <a href="products.php">products</a>
+    <form action="login.php" method="post">
       <label for="nameemail">Username or Email : </label>
       <input type="text" name="nameemail" id = "nameemail"> <br>
       <label for="password">Password : </label>
