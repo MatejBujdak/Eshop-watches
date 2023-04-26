@@ -14,12 +14,7 @@ if(empty($_SESSION["id"])){
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Index</title>
-  </head>
+
   <body>
   <a href="index.php">home</a> / <a href="products.php">products</a>
 

@@ -40,12 +40,7 @@ if(isset($_POST["submit"])){
 
 //HTML COD 
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Registration</title>
-  </head>
+
   <body>
     <h2>Registration</h2>
     <a href="index.php">home</a>/<a href="products.php">products</a>
