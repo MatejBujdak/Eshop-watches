@@ -9,7 +9,7 @@ $menu = new Menu();
 
 
 $card = $menu -> show($_SESSION["id"]);
-
+$customer = $menu -> info($_SESSION["id"]);
 
 ?>
 
@@ -17,24 +17,36 @@ $card = $menu -> show($_SESSION["id"]);
     <h1>SHOPPING CARD</h1>
     <a href="../index.php">home</a> / <a href="../products.php">products</a>
 
-    <h2> Toto su tvoje aktualne položky:</h2>
+    <h2> Tvoje položky v košíku:</h2>
 
     <ol>
       <?php
 
-      foreach ($card as $menuItem) {
+      $total_prize = 0;
 
-          echo "<li> Nazov produktu: <b>" . $menuItem['name'] . ",</b> Cena <b>" . $menuItem['prize'] ."</b>, Množstvo <b>". $menuItem['quantity']. '</b><br>
+      foreach ($card as $product) {
 
-            <a href="add.php?item_id='.$menuItem['item_id'].'">Add</a>
-            <a href="reduce.php?item_id='.$menuItem['item_id'].'">reduce</a>
-            <a href="delete.php?item_id='.$menuItem['item_id'].'">Delete</a> 
-            
-            </li>';
+          $total_prize += $product['prize'] * $product['quantity'];
+
+          echo "<li> Nazov produktu: <b>" . $product['name'] . ",</b> Cena <b>" . $product['prize'] ." €</b>, Množstvo <b>". $product['quantity']. '</b><br>
+
+            <b>
+            <a href="add.php?item_id='.$product['item_id'].'">Add</a>  
+            <a href="reduce.php?item_id='.$product['item_id'].'">Reduce</a>  
+            <a href="delete.php?item_id='.$product['item_id'].'">Delete</a>   
+            </b>
+            </li> <br>';
 
       }
+
+      echo "<h3>Celková suma: ". $total_prize . " € </h3>";
+      echo "<p>Vaša adresa zásielky je : ". $customer['adresa'] ." </p>";  
     
       ?>
+
+    <form action="order.php" method="post">
+      <button type="submit" name="order">Dokončiť objednávku</button>
+    </form>
 
     </ol>
 

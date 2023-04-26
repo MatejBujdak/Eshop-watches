@@ -30,9 +30,6 @@
               <li <?php echo $page === 'products' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
                 <a class="nav-link" href="products.php">Products</a>
               </li>
-              <li <?php echo $page === 'testimonial' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
-                <a class="nav-link" href="testimonial.php">Testimonial</a>
-              </li>
               <li <?php echo $page === 'contact' ? 'class="nav-item active"' : 'class="nav-item"' ?>>
                 <a class="nav-link" href="contact.php">Contact Us</a>
               </li>

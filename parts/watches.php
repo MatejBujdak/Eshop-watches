@@ -19,7 +19,7 @@
                   Men's Watch 1
                 </h6>
                 <h5>
-                  <span>$</span> 450
+                  450 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -53,7 +53,7 @@
                   Men's Watch 2
                 </h6>
                 <h5>
-                  <span>$</span> 380
+                  380 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -87,7 +87,7 @@
                   Men's Watch 3
                 </h6>
                 <h5>
-                  <span>$</span> 250
+                  250 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -138,7 +138,7 @@
                   Men's Watch 4
                 </h6>
                 <h5>
-                  <span>$</span> 950
+                  950 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -172,7 +172,7 @@
                   Men's Watch 5
                 </h6>
                 <h5>
-                  <span>$</span> 750
+                  750 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -206,7 +206,7 @@
                   Men's Watch 6
                 </h6>
                 <h5>
-                  <span>$</span> 490
+                  490 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -256,7 +256,7 @@
                   Men's Watch 7
                 </h6>
                 <h5>
-                  <span>$</span> 330
+                  330 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -290,7 +290,7 @@
                   Men's Watch 8
                 </h6>
                 <h5>
-                  <span>$</span> 220
+                  220 <span>€</span> 
                 </h5>
               </div>
               <div class="like">
@@ -324,7 +324,7 @@
                   Men's Watch 9
                 </h6>
                 <h5>
-                  <span>$</span> 130
+                  130 <span>€</span> 
                 </h5>
               </div>
               <div class="like">

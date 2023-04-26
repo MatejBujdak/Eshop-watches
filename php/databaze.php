@@ -64,7 +64,7 @@ class Menu
             $sql = "SELECT * FROM customers WHERE name = '$name' OR email = '$email'";
             $query = $this->connection->query($sql);
             $menuItem = $query->fetch(PDO::FETCH_ASSOC);
-            return $menuItem;
+            return $menuItem ? true : false;
         }catch (\Exception $exception) {
             echo "Chyba vo funkcii duplicate";
             die();
@@ -74,15 +74,16 @@ class Menu
     }
 
     //registracia
-    public function registration(string $name, string $email, string $password)
+    public function registration(string $name, string $email, string $password, string $adresa)
     {
         try{
-            $sql = "INSERT INTO customers (name, email, password) VALUES (:name, :email, :password)";
+            $sql = "INSERT INTO customers (name, email, password, adresa) VALUES (:name, :email, :password, :adresa)";
             $password = $this->hashing($password);
             $statement = $this->connection->prepare($sql);
             $statement->bindValue(':name', $name);
             $statement->bindValue(':email', $email);
             $statement->bindValue(':password', $password);
+            $statement->bindValue(':adresa', $adresa);
             $registration = $statement->execute();
 
         }catch (\Exception $exception) {
@@ -208,7 +209,7 @@ class Menu
 
     }
 
-    //funkcia na zobrazovanie košíku
+    //Zobrazovanie položiek košíka
     public function show(int $customerID): array
     {
 
@@ -240,9 +241,42 @@ class Menu
         }
 
     }catch(\Exception $exception){
-        echo "chyba vo funkcii newsletter";
+        echo "Chyba vo funkcii newsletter!";
     }
 
+    }
+
+    //Zobrazovanie položiek košíka
+    public function order(int $customerID)
+    {
+
+        try{ 
+            $sql = "SELECT * FROM shopping_card inner join products on products.item_id = shopping_card.item_id WHERE IdCustomers = $customerID";
+            $query = $this -> connection -> query($sql);
+            $shopping_card = $query->fetchAll(PDO::FETCH_ASSOC); 
+           
+            $sql = "SELECT * FROM customers WHERE id = '".$shopping_card[0]['IdCustomers']."'";
+            $query = $this -> connection -> query($sql);
+            $customer = $query->fetch(PDO::FETCH_ASSOC); 
+
+            // vloží údaje do databázy objednávok
+            foreach ($shopping_card as $card) {
+
+                $sql = "INSERT INTO orders (item_id, idCustomers, customer_name, prize, quantity, address) VALUES ('".$card['item_id']."', '".$card['IdCustomers']."', '".$card['customer_name']."', '".$card['prize']."', '".$card['quantity']."', '".$customer['adresa']."')";
+                $query = $this -> connection -> query($sql);
+                $add_order = $query->fetch(PDO::FETCH_ASSOC);
+            }
+
+            //odstrani položky s košíka
+            $sql = "DELETE FROM shopping_card WHERE IdCustomers = $customerID";
+            $query = $this -> connection -> query($sql);
+            $clear_shopping_card= $query->fetchAll(PDO::FETCH_ASSOC); 
+            
+        }catch (\Exception $exception) {
+            echo $exception->getMessage();
+            die();
+        }  
+    
     }
 
 }

@@ -13,12 +13,18 @@ if(!empty($_SESSION["id"])){
 if(isset($_POST["submit"])){
   $name = $_POST["name"];
   $email = $_POST["email"];
+  $adresa = $_POST["address"];
   $menu -> newsletter($email);
   $password = $_POST["password"];
   $confirmpassword = $_POST["confirmpassword"];
 
-  $duplicate = $menu->duplicate("$name","$email");
-  if($duplicate){
+  $info = false;
+
+  $duplicate = $menu->duplicate("$name","$email");  
+  if(empty($name) || empty($email) || empty($adresa) || empty($menu) || empty($password)){
+    echo "<script> alert('Neboli vyplnené všetky údaje!'); </script>";
+  }
+  elseif($duplicate){
     echo
     "<script> alert('Username or Email Has Already Taken'); </script>";
   }
@@ -26,7 +32,7 @@ if(isset($_POST["submit"])){
 
     if($password == $confirmpassword){
 
-      $menu->registration($name, $email, $password);
+      $menu->registration($name, $email, $password, $adresa);
       echo
       "<script> alert('Registration Successful'); </script>";
 
@@ -44,15 +50,17 @@ if(isset($_POST["submit"])){
   <body>
     <h2>Registration</h2>
     <a href="index.php">home</a>/<a href="products.php">products</a>
-    <form class="" action="" method="post" autocomplete="off">
-      <label for="name">Name : </label>
-      <input type="text" name="name" id = "name" required value=""> <br>
+    <form action="registration.php" method="post" autocomplete="off">
+      <label for="name">Meno : </label>
+      <input type="text" name="name"> <br>
+      <label for="name">Adresa : </label>
+      <input type="text" name="address"> <br>
       <label for="email">Email : </label>
-      <input type="email" name="email" id = "email" required value=""> <br>
-      <label for="password">Password : </label>
-      <input type="password" name="password" id = "password" required value=""> <br>
-      <label for="confirmpassword">Confirm Password : </label>
-      <input type="password" name="confirmpassword" id = "confirmpassword" required value=""> <br>
+      <input type="email" name="email"> <br>
+      <label for="password">Heslo : </label>
+      <input type="password" name="password"> <br>
+      <label for="confirmpassword">Potvrdiť heslo : </label>
+      <input type="password" name="confirmpassword"> <br>
       <button type="submit" name="submit">Register</button>
     </form>
     <br>
