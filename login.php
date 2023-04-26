@@ -19,10 +19,11 @@ if(isset($_POST["submit"])){
   $result = $menu->login($nameemail);
 
   if(!empty($result)){
-    if($password == $result['password']){
+    if($menu->hashing($password) == $result['password']){
       $_SESSION["login"] = true;
       $_SESSION["id"] = $result["id"];
       $_SESSION["name"] = $result["name"];
+      $_SESSION["user_email"] = $result["email"];
       header("Location: user.php");
     }
     else{
