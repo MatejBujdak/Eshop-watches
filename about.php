@@ -37,7 +37,7 @@
               passages of Lorem Ipsum
             </p>
             <a href="">
-              Read More
+              Read More 
             </a>
           </div>
         </div>
