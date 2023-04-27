@@ -50,7 +50,7 @@ if(isset($_POST["submit"])){
   <body>
     <h2>Registration</h2>
     <a href="index.php">home</a>/<a href="products.php">products</a>
-    <form action="registration.php" method="post" autocomplete="off">
+    <form action="registration.php" method="post">
       <label for="name">Meno : </label>
       <input type="text" name="name"> <br>
       <label for="name">Adresa : </label>

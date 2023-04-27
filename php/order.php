@@ -9,9 +9,13 @@ $menu = new Menu();
 
 if(isset($_POST['order'])){
 
-    $menu->order($_SESSION["id"]);
-
-    header("Location: card.php?order=1");
+    $order_status = $menu->order($_SESSION["id"]);
+    if($order_status){
+        header("Location: card.php?order=1");
+    }else{
+        header("Location: card.php?order=0");
+    }
+    
 }
 
 ?>

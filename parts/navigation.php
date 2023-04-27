@@ -1,6 +1,6 @@
 
 <?php
-    $page = basename($_SERVER['PHP_SELF']);   //premenná na ziskanie poslednej zložky v url adrese
+    $page = basename($_SERVER['PHP_SELF']);   //premenná na ziskanie poslednej zložky v aktualnej url adrese
 ?>
 <body <?php echo $page === 'about.php' || $page === 'products.php' || $page === 'contact.php' ? 'class="sub_page"' : '' ?>>
   <div class="hero_area">

@@ -18,7 +18,7 @@ if(empty($_SESSION["id"])){
   <body>
   <a href="index.php">home</a> / <a href="products.php">products</a>
 
-    <h2>Meno: <?php echo $_SESSION["name"]; ?></h2>
+    <h2>Name: <?php echo $_SESSION["name"]; ?></h2>
     <h2>Email: <?php echo $_SESSION["user_email"]; ?></h2>
     <a href="logout.php">logout</a>
     

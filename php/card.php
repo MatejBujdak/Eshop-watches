@@ -17,7 +17,7 @@ $customer = $menu -> info($_SESSION["id"]);
     <h1>SHOPPING CARD</h1>
     <a href="../index.php">home</a> / <a href="../products.php">products</a>
 
-    <h2> Tvoje položky v košíku:</h2>
+    <h2> Your items in the cart:</h2>
 
     <ol>
       <?php
@@ -28,7 +28,7 @@ $customer = $menu -> info($_SESSION["id"]);
 
           $total_prize += $product['prize'] * $product['quantity'];
 
-          echo "<li> Nazov produktu: <b>" . $product['name'] . ",</b> Cena <b>" . $product['prize'] ." €</b>, Množstvo <b>". $product['quantity']. '</b><br>
+          echo "<li> Product name: <b>" . $product['name'] . ",</b> Prize <b>" . $product['prize'] ." €</b>, Quantity <b>". $product['quantity']. '</b><br>
 
             <b>
             <a href="add.php?item_id='.$product['item_id'].'">Add</a>  
@@ -39,17 +39,20 @@ $customer = $menu -> info($_SESSION["id"]);
 
       }
 
-      echo "<h3>Celková suma: ". $total_prize . " € </h3>";
-      echo "<p>Vaša adresa zásielky je : ". $customer['adresa'] ." </p>";  
+      echo "<h3>Total prize: ". $total_prize . " € </h3>";
+      echo "<p>Your shipping address is : ". $customer['adresa'] ." </p>";  
     
-      if(isset($_GET['order'])){
-        echo "Tvoja objednavka bola úspešná!";
+      if(isset($_GET['order']) && $_GET['order'] == 1){
+        echo "Your order was successful!";
+      }
+      if(isset($_GET['order']) && $_GET['order'] == 0){
+        echo "Your basket is empty!";
       }
       
       ?>
 
     <form action="order.php" method="post">
-      <button type="submit" name="order">Dokončiť objednávku</button>
+      <button type="submit" name="order">order</button>
     </form>
 
     </ol>

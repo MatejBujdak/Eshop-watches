@@ -231,13 +231,18 @@ class Menu
     {
 
     try{
-        $sql = "SELECT * FROM newsletter WHERE email = '".$email."'";
-        $query = $this->connection->query($sql);
-        $email_duplicate = $query->fetchAll(PDO::FETCH_ASSOC); 
+        $sql = "SELECT * FROM newsletter WHERE email = :email";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':email', $email);
+        $result = $statement->execute();
+        $email_duplicate = $statement->fetch(PDO::FETCH_ASSOC); 
+        return  $email_duplicate ? $email_duplicate : [];
     
         if(count($email_duplicate) == 0){
-            $sql = "INSERT INTO newsletter (email) VALUES ('".$email."')";
-            $query = $this->connection->query($sql);
+            $sql = "INSERT INTO newsletter (email) VALUES (':email')";
+            $statement = $this->connection->prepare($sql);
+            $statement->bindValue(':email', $email);
+            $result = $statement->execute();
         }
 
     }catch(\Exception $exception){
@@ -247,12 +252,16 @@ class Menu
     }
 
     //Zobrazovanie položiek košíka
-    public function order(int $customerID)
+    public function order(int $customerID): bool
     {
         try{ 
             $sql = "SELECT * FROM shopping_card inner join products on products.item_id = shopping_card.item_id WHERE IdCustomers = $customerID";
             $query = $this -> connection -> query($sql);
             $shopping_card = $query->fetchAll(PDO::FETCH_ASSOC); 
+
+            if(empty($shopping_card)){
+                return false;
+            }
            
             $sql = "SELECT * FROM customers WHERE id = '".$shopping_card[0]['IdCustomers']."'";
             $query = $this -> connection -> query($sql);
@@ -274,7 +283,9 @@ class Menu
         }catch (\Exception $exception) {
             echo $exception->getMessage();
             die();
-        }  
+        } 
+        
+        return true;
     
     }
 
