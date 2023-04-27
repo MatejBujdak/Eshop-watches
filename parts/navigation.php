@@ -8,7 +8,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span>
               HandTime
             </span>
@@ -39,7 +39,7 @@
               <a href="login.php">
               <?php 
                 session_start();
-                echo isset($_SESSION['login']) && $_SESSION['login'] == true ? $_SESSION['name'] : "prihláste sa"
+                echo isset($_SESSION['login']) && $_SESSION['login'] == true ? $_SESSION['name'] : "prihláste sa";
               ?>
 
                 <i class="fa fa-user" aria-hidden="true"></i>
