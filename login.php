@@ -1,13 +1,13 @@
 <?php
 
-include "php/databaze.php";
+include "database.php";
 include "parts/head.php";
+include "parts/navigation.php";
 
-use main\Menu;
+use main\dp;
 
-$menu = new Menu();
+$menu = new dp();
 
-session_start();
 
 if(!empty($_SESSION["id"])){
   header("Location: user.php");
@@ -41,7 +41,6 @@ if(isset($_POST["submit"])){
 
   <body>
     <h2>Login</h2>
-    <a href="index.php">home</a> / <a href="products.php">products</a>
     <form action="login.php" method="post">
       <label for="nameemail">Username or Email : </label>
       <input type="text" name="nameemail" id = "nameemail"> <br>

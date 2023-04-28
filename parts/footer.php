@@ -112,7 +112,7 @@
             </h5>
 
             <!-- NEWSLETTER -->
-            <form action="php/newsletter.php" method="post">
+            <form action="newsletter.php" method="post">
               <input type="email" placeholder="Enter your email" name="email">
               <button type="submit" name="submit">Subscribe </button>
             </form>

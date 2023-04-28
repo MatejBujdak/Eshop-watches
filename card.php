@@ -1,12 +1,13 @@
 <?php
-include "../parts/head.php";
-include "../auth_check.php";
-include "../php/databaze.php";
 
-use main\Menu;
+include "parts/head.php";
+include "database.php";
+include "parts/navigation.php";
+include "auth_check.php";
 
-$menu = new Menu();
+use main\dp;
 
+$menu = new dp();
 
 $card = $menu -> show($_SESSION["id"]);
 $customer = $menu -> info($_SESSION["id"]);
@@ -15,7 +16,10 @@ $customer = $menu -> info($_SESSION["id"]);
 
 <body>
     <h1>SHOPPING CARD</h1>
-    <a href="../index.php">home</a> / <a href="../products.php">products</a>
+
+    <form action="user_order.php" method="post">
+      <button type="submit" name="order">Your orders</button>
+    </form>
 
     <h2> Your items in the cart:</h2>
 
@@ -28,10 +32,10 @@ $customer = $menu -> info($_SESSION["id"]);
 
           $total_prize += $product['prize'] * $product['quantity'];
 
-          echo "<li> Product name: <b>" . $product['name'] . ",</b> Prize <b>" . $product['prize'] ." €</b>, Quantity <b>". $product['quantity']. '</b><br>
+          echo "<li> Product name: <b>" . $product['product_name'] . ",</b> Prize <b>" . $product['prize'] ." €</b>, Quantity <b>". $product['quantity']. '</b><br>
 
             <b>
-            <a href="add.php?item_id='.$product['item_id'].'">Add</a>  
+            <a href="add.php?item_id='.$product['item_id'].'&&card=card.php">Add</a>  
             <a href="reduce.php?item_id='.$product['item_id'].'">Reduce</a>  
             <a href="delete.php?item_id='.$product['item_id'].'">Delete</a>   
             </b>

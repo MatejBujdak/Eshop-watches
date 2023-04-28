@@ -1,25 +1,22 @@
 <?php
 
-include "php/databaze.php";
+include "database.php";
 include "parts/head.php";
+include "parts/navigation.php";
+include "auth_check.php";
 
-use main\Menu;
+use main\dp;
 
-$menu = new Menu();
-
-session_start();
-
-if(empty($_SESSION["id"])){
-  header("Location: login.php");
-}
+$menu = new dp();
 
 ?>
 
   <body>
-  <a href="index.php">home</a> / <a href="products.php">products</a>
 
+    <br>
     <h2>Name: <?php echo $_SESSION["name"]; ?></h2>
     <h2>Email: <?php echo $_SESSION["user_email"]; ?></h2>
+    <br>
     <a href="logout.php">logout</a>
     
   </body>

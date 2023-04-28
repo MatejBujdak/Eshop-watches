@@ -1,11 +1,12 @@
 <?php
 
-include "php/databaze.php";
+include "database.php";
 include "parts/head.php";
+include "parts/navigation.php";
 
-use main\Menu;
+use main\dp;
 
-$menu = new Menu();
+$menu = new dp();
 
 if(!empty($_SESSION["id"])){
   header("Location: index.php");
@@ -33,8 +34,17 @@ if(isset($_POST["submit"])){
     if($password == $confirmpassword){
 
       $menu->registration($name, $email, $password, $adresa);
-      echo
-      "<script> alert('Registration Successful'); </script>";
+
+      //auto-login
+      $result = $menu->login($name);
+
+      $_SESSION["login"] = true;
+      $_SESSION["id"] = $result["id"];
+      $_SESSION["name"] = $result["name"];
+      $_SESSION["user_email"] = $result["email"];
+
+      header("Location: user.php");
+      
 
     }
     else{
@@ -49,19 +59,18 @@ if(isset($_POST["submit"])){
 
   <body>
     <h2>Registration</h2>
-    <a href="index.php">home</a>/<a href="products.php">products</a>
     <form action="registration.php" method="post">
-      <label for="name">Meno : </label>
+      <label for="name">Name : </label>
       <input type="text" name="name"> <br>
-      <label for="name">Adresa : </label>
+      <label for="name">Address : </label>
       <input type="text" name="address"> <br>
       <label for="email">Email : </label>
       <input type="email" name="email"> <br>
-      <label for="password">Heslo : </label>
+      <label for="password">Password : </label>
       <input type="password" name="password"> <br>
-      <label for="confirmpassword">Potvrdiť heslo : </label>
+      <label for="confirmpassword">Confirm password : </label>
       <input type="password" name="confirmpassword"> <br>
-      <button type="submit" name="submit">Register</button>
+      <button type="submit" name="submit">Create account</button>
     </form>
     <br>
     <a href="login.php">Login</a>

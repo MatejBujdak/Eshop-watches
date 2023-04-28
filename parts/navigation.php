@@ -1,5 +1,6 @@
 
 <?php
+    session_start();
     $page = basename($_SERVER['PHP_SELF']);   //premenná na ziskanie poslednej zložky v aktualnej url adrese
 ?>
 <body <?php echo $page === 'about.php' || $page === 'products.php' || $page === 'contact.php' ? 'class="sub_page"' : '' ?>>
@@ -38,13 +39,12 @@
             <div class="user_optio_box">
               <a href="login.php">
               <?php 
-                session_start();
                 echo isset($_SESSION['login']) && $_SESSION['login'] == true ? $_SESSION['name'] : "prihláste sa";
               ?>
 
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a href="php/card.php">
+              <a href="card.php">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </a>
             </div>

@@ -1,11 +1,11 @@
  
 <?php
 
-include "php/databaze.php";
+include "database.php";
 
-use main\Menu;
+use main\dp;
 
-$menu = new Menu();
+$menu = new dp();
 
 if(isset($_POST['submit'])){
     if(!empty($_POST['name']) && !empty($_POST['phone_number']) && !empty($_POST['contact_email']) && !empty($_POST['message'])){

@@ -1,11 +1,11 @@
 <?php
 
-include "../php/databaze.php";
-include "../parts/head.php";
+include "database.php";
+include "parts/head.php";
 
-use main\Menu;
+use main\dp;
 
-$menu = new Menu();
+$menu = new dp();
 session_start();
 
 if(isset($_POST['email'])){

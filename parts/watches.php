@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=1">
+            <a href="add.php?item_id=1">
               Add To Cart
             </a>
           </div>
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=2">
+            <a href="add.php?item_id=2">
               Add To Cart
             </a>
           </div>
@@ -105,7 +105,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=3">
+            <a href="add.php?item_id=3">
               Add To Cart
             </a>
           </div>
@@ -156,7 +156,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=4">
+            <a href="add.php?item_id=4">
               Add To Cart
             </a>
           </div>
@@ -190,7 +190,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=5">
+            <a href="add.php?item_id=5">
               Add To Cart
             </a>
           </div>
@@ -224,7 +224,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=6">
+            <a href="add.php?item_id=6">
               Add To Cart
             </a>
           </div>
@@ -274,7 +274,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=7">
+            <a href="add.php?item_id=7">
               Add To Cart
             </a>
           </div>
@@ -308,7 +308,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=8">
+            <a href="add.php?item_id=8">
               Add To Cart
             </a>
           </div>
@@ -342,7 +342,7 @@
             </div>
           </div>
           <div class="btn-box">
-            <a href="php/add.php?item_id=9">
+            <a href="add.php?item_id=9">
               Add To Cart
             </a>
           </div>
