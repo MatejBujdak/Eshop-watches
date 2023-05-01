@@ -15,11 +15,13 @@ $customer = $menu -> info($_SESSION["id"]);
 ?>
 
 <body>
+  <div class="container">
+  <br><br><br>
     <h1>SHOPPING CARD</h1>
 
     <form action="user_order.php" method="post">
       <button type="submit" name="order">Your orders</button>
-    </form>
+    </form><br>
 
     <h2> Your items in the cart:</h2>
 
@@ -42,8 +44,8 @@ $customer = $menu -> info($_SESSION["id"]);
             </li> <br>';
 
       }
-
-      echo "<h3>Total prize: ". $total_prize . " € </h3>";
+      
+      echo "<br><h3>Total prize: ". $total_prize . " € </h3>";
       echo "<p>Your shipping address is : ". $customer['adresa'] ." </p>";  
     
       if(isset($_GET['order']) && $_GET['order'] == 1){
@@ -62,6 +64,11 @@ $customer = $menu -> info($_SESSION["id"]);
     </ol>
 
     <br>
-
+    </div>
+    <br><br><br>
   </body>
-</html>
+
+<?php
+include "parts/footer.php";
+?>
+

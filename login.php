@@ -24,6 +24,7 @@ if(isset($_POST["submit"])){
       $_SESSION["id"] = $result["id"];
       $_SESSION["name"] = $result["name"];
       $_SESSION["user_email"] = $result["email"];
+      $_SESSION["adresa"] = $result["adresa"];
       header("Location: user.php");
     }
     else{
@@ -40,15 +41,21 @@ if(isset($_POST["submit"])){
 ?>
 
   <body>
-    <h2>Login</h2>
+  <br>
+    <h2>Login</h2><br>
     <form action="login.php" method="post">
-      <label for="nameemail">Username or Email : </label>
+      <label for="nameemail">Name or Email : </label>
       <input type="text" name="nameemail" id = "nameemail"> <br>
       <label for="password">Password : </label>
-      <input type="password" name="password" id = "password"> <br>
+      <input type="password" name="password" id = "password"> <br><br>
       <button type="submit" name="submit">Login</button>
     </form>
     <br> 
     <a href="registration.php">Registration</a>
   </body>
+  <br><br><br>
 </html>
+
+<?php
+include "parts/footer.php";
+?>

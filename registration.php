@@ -27,7 +27,7 @@ if(isset($_POST["submit"])){
   }
   elseif($duplicate){
     echo
-    "<script> alert('Username or Email Has Already Taken'); </script>";
+    "<script> alert('Name or Email Has Already Taken'); </script>";
   }
   else{
 
@@ -42,6 +42,7 @@ if(isset($_POST["submit"])){
       $_SESSION["id"] = $result["id"];
       $_SESSION["name"] = $result["name"];
       $_SESSION["user_email"] = $result["email"];
+      $_SESSION["adresa"] = $result["adresa"];
 
       header("Location: user.php");
       
@@ -58,7 +59,8 @@ if(isset($_POST["submit"])){
 ?>
 
   <body>
-    <h2>Registration</h2>
+  <br>
+    <h2>Registration</h2><br>
     <form action="registration.php" method="post">
       <label for="name">Name : </label>
       <input type="text" name="name"> <br>
@@ -69,10 +71,15 @@ if(isset($_POST["submit"])){
       <label for="password">Password : </label>
       <input type="password" name="password"> <br>
       <label for="confirmpassword">Confirm password : </label>
-      <input type="password" name="confirmpassword"> <br>
+      <input type="password" name="confirmpassword"> <br><br>
       <button type="submit" name="submit">Create account</button>
     </form>
     <br>
     <a href="login.php">Login</a>
+    <br><br><br>
   </body>
 </html>
+
+<?php
+include "parts/footer.php";
+?>

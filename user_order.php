@@ -14,11 +14,14 @@ $orders= $menu->show_orders($_SESSION["id"]);
 ?>
  
 <body>
+  <div class="container">
+  <br><br><br>
     <h1>YOUR ORDERS</h1>
 
     <form action="card.php" method="post">
       <button type="submit" name="order">Back to card</button>
     </form>
+    <br>
 
     <h2> Your ordered items:</h2>
 
@@ -41,7 +44,11 @@ $orders= $menu->show_orders($_SESSION["id"]);
 
     </ol>
 
-    <br>
-
+    <br><br><br>
+  </div>
   </body>
 </html>
+
+<?php
+include "parts/footer.php";
+?>
