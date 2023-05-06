@@ -3,15 +3,22 @@
 include "database.php";
 include "parts/head.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
+$functions = new Data();
 session_start();
 
 if(isset($_POST['email'])){
-    $menu-> newsletter($_POST['email']);
+    $newsletter = $functions->newsletter($_POST['email']);
+    
+    if(!$newsletter) {
+        $errors = $functions->getErrors();
+        foreach($errors as $error) {
+          echo $error . "<br>";
+        }
+    }
     $_SESSION['email_created'] = true;
-    header("Location:../index.php");
+    header("Location:index.php");
 }
 
 ?>

@@ -3,16 +3,24 @@
 
 include "database.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
+$functions = new Data();
 
 if(isset($_POST['submit'])){
     if(!empty($_POST['name']) && !empty($_POST['phone_number']) && !empty($_POST['contact_email']) && !empty($_POST['message'])){
-        $menu->contact($_POST['name'], $_POST['phone_number'], $_POST['contact_email'], $_POST['message']);
-        echo "<script> alert('Vaša správa bola prijatá!') </script>";
+
+        $contact = $functions->contact($_POST['name'], $_POST['phone_number'], $_POST['contact_email'], $_POST['message']);
+
+        if(!$contact){
+          $errors = $functions->getErrors();
+          foreach($errors as $error) {
+              echo $error . "<br>";
+      }}else{
+        echo "<script> alert('Your message has been received!') </script>";
+      }
     }else{
-        echo "<script> alert('Treba vyplniť všetky údaje!') </script>";
+        echo "<script> alert('All data must be filled in!') </script>";
     }
 }
 

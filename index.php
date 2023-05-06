@@ -4,7 +4,7 @@
   
   if(isset($_SESSION['email_created']) && $_SESSION['email_created'] == true){
     echo
-  "<script> alert('Bol si prihlásený k odberu noviniek!'); </script>";
+  "<script> alert('You have been subscribed to the newsletter!'); </script>";
   $_SESSION['email_created'] = false;
   }
 ?>

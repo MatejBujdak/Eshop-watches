@@ -5,12 +5,20 @@ include "database.php";
 include "parts/navigation.php";
 include "auth_check.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
+$functions = new Data();
 
-$card = $menu -> show($_SESSION["id"]);
-$customer = $menu -> info($_SESSION["id"]);
+$card = $functions -> show($_SESSION["id"]);
+$customer = $functions -> info($_SESSION["id"]);
+
+if(empty($customer) || empty($card)){
+  $errors = $functions->getErrors();
+  foreach($errors as $error) {
+    echo $error . "<br>";
+  }  
+}
+
 
 ?>
 
@@ -34,6 +42,7 @@ $customer = $menu -> info($_SESSION["id"]);
 
           $total_prize += $product['prize'] * $product['quantity'];
 
+          
           echo "<li> Product name: <b>" . $product['product_name'] . ",</b> Prize <b>" . $product['prize'] ." €</b>, Quantity <b>". $product['quantity']. '</b><br>
 
             <b>

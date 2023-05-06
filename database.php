@@ -5,7 +5,7 @@ namespace main;
 use \PDO;
 
 
-class dp
+class Data
 {
 
     private string $hostname = "localhost";
@@ -17,6 +17,8 @@ class dp
     private $connection;
 
     private string $hash = "sha256";
+
+    protected array $errors = [];
 
     // hashovanie hesla
     public function hashing(string $input): string
@@ -48,6 +50,8 @@ class dp
             $this->dbName = $dbName;
         }
 
+        $this->errors = [];
+
         try {
             $this->connection = new PDO("mysql:charset=utf8;host=" . $this->hostname . ";dbname=" . $this->dbName . ";port=" . $this->port, $this->username, $this->password);
         } catch (\Exception $exception) {
@@ -59,22 +63,24 @@ class dp
     //kontrola duplicity pri registracii
     public function duplicate(string $name, string $email): bool
     {
-
         try {
             $sql = "SELECT * FROM customers WHERE name = '$name' OR email = '$email'";
             $query = $this->connection->query($sql);
             $menuItem = $query->fetch(PDO::FETCH_ASSOC);
             return $menuItem ? true : false;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii duplicate";
-            die();
+            $this->errors[] = "Chyba vo funkcii duplicate";
+            return false;
         }
+    }
 
-
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
     //registracia
-    public function registration(string $name, string $email, string $password, string $adresa)
+    public function registration(string $name, string $email, string $password, string $adresa): bool
     {
         try {
             $sql = "INSERT INTO customers (name, email, password, adresa) VALUES (:name, :email, :password, :adresa)";
@@ -85,13 +91,11 @@ class dp
             $statement->bindValue(':password', $password);
             $statement->bindValue(':adresa', $adresa);
             $registration = $statement->execute();
-
+            return $registration;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii registration";
-            die();
+            $this->errors[] = "Chyba vo funkcii registration";
+            return false;
         }
-
-
     }
 
     //prihlasenie
@@ -106,13 +110,13 @@ class dp
             return $menuItems ? $menuItems : [];
 
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii login";
-            die();
+            $this->errors[] = "Chyba vo funkcii login";
+            return [];
         }
     }
 
     //informacie používatela
-    public function info(string $id)
+    public function info(string $id): array
     {
 
         try {
@@ -121,13 +125,13 @@ class dp
             $info = $query->fetch(PDO::FETCH_ASSOC);
             return $info;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii login";
-            die();
+            $this->errors[] = "Chyba vo funkcii login";
+            return [];
         }
     }
 
     //funkcia na pridanie do košíku
-    public function add(int $customerID, int $item_id)
+    public function add(int $customerID, int $item_id): bool
     {
         try {
             $sql = "SELECT * FROM products WHERE item_id = $item_id";
@@ -150,16 +154,17 @@ class dp
                 VALUES ('" . $product_info['item_id'] . "', '" . $customer_info['id'] . "', '" . $customer_info['name'] . "', '" . $product_info['prize'] . "', '1')";
                 $query = $this->connection->query($sql);
             }
-
+            
+            return true;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii add";
-            die();
+            $this->errors[] = "Chyba vo funkcii add";
+            return false;
         }
 
     }
 
     //funkcia, ktora odoberie 1 s celkoveho množstva
-    public function remove(int $customerID, int $item_id)
+    public function remove(int $customerID, int $item_id): bool 
     {
         try {
             $sql = "SELECT * FROM products WHERE item_id = $item_id";
@@ -181,15 +186,17 @@ class dp
                 $sql = "UPDATE `shopping_card` SET quantity = quantity - 1 WHERE '" . $customer_info['id'] . "' AND item_id = '" . $product_info['item_id'] . "'";
                 $query = $this->connection->query($sql);
             }
+
+            return true;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii remove";
-            die();
+            $this->errors[] = "Chyba vo funkcii remove";
+            return false;
         }
 
     }
 
     //funkcia na odstranenie položky s košíka
-    public function delete(int $customerID, int $item_id)
+    public function delete(int $customerID, int $item_id): bool
     {
         try {
             $sql = "SELECT * FROM products WHERE item_id = $item_id";
@@ -202,9 +209,11 @@ class dp
 
             $sql = "DELETE FROM shopping_card WHERE idCustomers = '" . $customer_info['id'] . "' AND item_id = '" . $product_info['item_id'] . "'";
             $query = $this->connection->query($sql);
+
+            return true;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii delete";
-            die();
+            $this->errors[] = "Chyba vo funkcii remove";
+            return false;
         }
 
 
@@ -218,24 +227,23 @@ class dp
             $sql = "SELECT * FROM shopping_card inner join products on products.item_id = shopping_card.item_id WHERE IdCustomers = $customerID";
             $query = $this->connection->query($sql);
             $shopping_card = $query->fetchAll(PDO::FETCH_ASSOC);
-
             return $shopping_card;
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii show";
-            die();
+            $this->errors[] =  "Chyba vo funkcii show";
+            return [];
         }
 
     }
 
     //pridanie emailu do newsletter odoberatelov
-    public function newsletter(string $email)
+    public function newsletter(string $email): array
     {
 
         try {
             $sql = "SELECT * FROM newsletter WHERE email = :email";
             $statement = $this->connection->prepare($sql);
             $statement->bindValue(':email', $email);
-            $result = $statement->execute();
+            $statement->execute();
             $email_duplicate = $statement->fetch(PDO::FETCH_ASSOC);
             return $email_duplicate ? $email_duplicate : [];
 
@@ -247,7 +255,8 @@ class dp
             }
 
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii newsletter!";
+            $this->errors[] =  "Chyba vo funkcii newsletter!";
+            return [];
         }
 
     }
@@ -281,20 +290,18 @@ class dp
                 $statement->bindValue(':quantity', $card['quantity']);
                 $statement->bindValue(':adresa', $customer['adresa']);
                 $statement->bindValue(':product', $card['product_name']);
-                $accepted_form = $statement->execute();
+                $statement->execute();
             }
 
             //odstrani položky s košíka
             $sql = "DELETE FROM shopping_card WHERE IdCustomers = $customerID";
             $query = $this->connection->query($sql);
-            $clear_shopping_card = $query->fetchAll(PDO::FETCH_ASSOC);
 
+            return true;
         } catch (\Exception $exception) {
-            echo $exception->getMessage();
-            die();
+            $this->errors[] = "Chyba vo funkcii order";
+            return false;
         }
-
-        return true;
 
     }
 
@@ -312,8 +319,8 @@ class dp
             return $accepted_form;
 
         } catch (\Exception $exception) {
-            echo "Chyba vo funkcii contact";
-            die();
+            $this->errors[] = "Chyba vo funkcii contact";
+            return false;
         }
 
     }
@@ -331,8 +338,8 @@ class dp
              return $user_orders ? $user_orders : [];
              
          } catch (\Exception $exception) {
-             echo "Chyba vo funkcii show_orders";
-             die();
+            $this->errors[] = "Chyba vo funkcii show_orders";
+            return [];
          }
 
      }

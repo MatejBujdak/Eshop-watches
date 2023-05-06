@@ -5,11 +5,19 @@ include "database.php";
 include "parts/navigation.php";
 include "auth_check.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
+$functions = new Data();
 
-$orders= $menu->show_orders($_SESSION["id"]);
+$orders= $functions->show_orders($_SESSION["id"]);
+
+
+if(empty($orders)) {
+  $errors = $functions->getErrors();
+  foreach($errors as $error) {
+    echo $error . "<br>";
+  }
+}
 
 ?>
  

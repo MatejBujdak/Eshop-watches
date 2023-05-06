@@ -4,10 +4,9 @@ include "database.php";
 include "parts/head.php";
 include "parts/navigation.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
-
+$functions = new Data();
 
 if(!empty($_SESSION["id"])){
   header("Location: user.php");
@@ -16,10 +15,17 @@ if(isset($_POST["submit"])){
   $nameemail = $_POST["nameemail"];
   $password = $_POST["password"];
 
-  $result = $menu->login($nameemail);
+  $result = $functions->login($nameemail);
+
+  if(empty($result)){
+    $errors = $functions->getErrors();
+    foreach($errors as $error) {
+      echo $error . "<br>";
+    }
+  }
 
   if(!empty($result)){
-    if($menu->hashing($password) == $result['password']){
+    if($functions->hashing($password) == $result['password']){
       $_SESSION["login"] = true;
       $_SESSION["id"] = $result["id"];
       $_SESSION["name"] = $result["name"];

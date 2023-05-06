@@ -4,9 +4,9 @@ include "database.php";
 include "parts/head.php";
 include "parts/navigation.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
+$functions = new Data();
 
 if(!empty($_SESSION["id"])){
   header("Location: index.php");
@@ -15,14 +15,20 @@ if(isset($_POST["submit"])){
   $name = $_POST["name"];
   $email = $_POST["email"];
   $adresa = $_POST["address"];
-  $menu -> newsletter($email);
+  $functions -> newsletter($email);
   $password = $_POST["password"];
   $confirmpassword = $_POST["confirmpassword"];
 
-  $info = false;
+  $duplicate = $functions->duplicate("$name","$email"); 
 
-  $duplicate = $menu->duplicate("$name","$email");  
-  if(empty($name) || empty($email) || empty($adresa) || empty($menu) || empty($password)){
+  if(!$duplicate) {
+    $errors = $functions->getErrors();
+    foreach($errors as $error) {
+      echo $error . "<br>";
+    }
+  }
+  
+  if(empty($name) || empty($email) || empty($adresa) || empty($functions) || empty($password)){
     echo "<script> alert('Neboli vyplnené všetky údaje!'); </script>";
   }
   elseif($duplicate){
@@ -33,10 +39,17 @@ if(isset($_POST["submit"])){
 
     if($password == $confirmpassword){
 
-      $menu->registration($name, $email, $password, $adresa);
+      $registration = $functions->registration($name, $email, $password, $adresa);
+
+      if(!$registration) {
+        $errors = $functions->getErrors();
+        foreach($errors as $error) {
+          echo $error . "<br>";
+        }
+      }
 
       //auto-login
-      $result = $menu->login($name);
+      $result = $functions->login($name);
 
       $_SESSION["login"] = true;
       $_SESSION["id"] = $result["id"];

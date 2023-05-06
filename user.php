@@ -5,9 +5,9 @@ include "parts/head.php";
 include "parts/navigation.php";
 include "auth_check.php";
 
-use main\dp;
+use main\Data;
 
-$menu = new dp();
+$functions = new Data();
 
 ?>
 
