@@ -14,7 +14,7 @@ class Data
     private string $password = "";
     private string $dbName = "shop";
 
-    private $connection;
+    private PDO $connection;
 
     private string $hash = "sha256";
 
@@ -105,7 +105,7 @@ class Data
             $sql = "SELECT * FROM customers WHERE name = :nameemail OR email = :nameemail";
             $statement = $this->connection->prepare($sql);
             $statement->bindValue(':nameemail', $nameemail);
-            $result = $statement->execute();
+            $statement->execute();
             $menuItems = $statement->fetch(PDO::FETCH_ASSOC);
             return $menuItems ? $menuItems : [];
 
@@ -334,7 +334,6 @@ class Data
              $sql = "SELECT * FROM orders WHERE IdCustomers = $customerID";
              $query = $this->connection->query($sql);
              $user_orders = $query->fetchAll(PDO::FETCH_ASSOC);
-
              return $user_orders ? $user_orders : [];
              
          } catch (\Exception $exception) {

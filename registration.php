@@ -68,13 +68,32 @@ if(isset($_POST["submit"])){
   }
 }
 
+
 //HTML COD 
 ?>
+<style>
+    h2 {
+    text-align: center;
+    color: #333333;
+  }
+  .form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .form a {
+  margin-top: 10px;
+}
+</style>
 
   <body>
   <br>
+    <div class="form">
     <h2>Registration</h2><br>
-    <form action="registration.php" method="post">
+    <form action="registration.php" method="post" >
       <label for="name">Name : </label>
       <input type="text" name="name"> <br>
       <label for="name">Address : </label>
@@ -86,9 +105,10 @@ if(isset($_POST["submit"])){
       <label for="confirmpassword">Confirm password : </label>
       <input type="password" name="confirmpassword"> <br><br>
       <button type="submit" name="submit">Create account</button>
+      <a href="login.php">Login</a>
     </form>
-    <br>
-    <a href="login.php">Login</a>
+    </div>
+
     <br><br><br>
   </body>
 </html>

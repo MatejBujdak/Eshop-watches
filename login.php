@@ -46,8 +46,27 @@ if(isset($_POST["submit"])){
 }
 ?>
 
+<style>
+   h2 {
+    text-align: center;
+    color: #333333;
+  }
+  .form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .form a {
+  margin-top: 10px;
+}
+</style>
+
   <body>
   <br>
+  <div class="form">
     <h2>Login</h2><br>
     <form action="login.php" method="post">
       <label for="nameemail">Name or Email : </label>
@@ -55,9 +74,10 @@ if(isset($_POST["submit"])){
       <label for="password">Password : </label>
       <input type="password" name="password" id = "password"> <br><br>
       <button type="submit" name="submit">Login</button>
+      <a href="registration.php">Registration</a>
     </form>
+</div>
     <br> 
-    <a href="registration.php">Registration</a>
   </body>
   <br><br><br>
 </html>
