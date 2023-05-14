@@ -238,28 +238,27 @@ class Data
     //pridanie emailu do newsletter odoberatelov
     public function newsletter(string $email): array
     {
-
         try {
             $sql = "SELECT * FROM newsletter WHERE email = :email";
             $statement = $this->connection->prepare($sql);
             $statement->bindValue(':email', $email);
             $statement->execute();
             $email_duplicate = $statement->fetch(PDO::FETCH_ASSOC);
-            return $email_duplicate ? $email_duplicate : [];
-
-            if (count($email_duplicate) == 0) {
-                $sql = "INSERT INTO newsletter (email) VALUES (':email')";
+    
+            if (empty($email_duplicate)) {
+                $sql = "INSERT INTO newsletter (email) VALUES (:email)";
                 $statement = $this->connection->prepare($sql);
                 $statement->bindValue(':email', $email);
-                $result = $statement->execute();
+                $statement->execute();
             }
-
+    
+            return $email_duplicate ? $email_duplicate : [];
         } catch (\Exception $exception) {
-            $this->errors[] =  "Chyba vo funkcii newsletter!";
+            $this->errors[] = "Chyba vo funkcii newsletter!";
             return [];
         }
-
     }
+    
 
     //presunie s košíka do sekcie orders
     public function order(int $customerID): bool

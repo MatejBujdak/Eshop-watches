@@ -17,6 +17,7 @@ if(isset($_POST['email'])){
           echo $error . "<br>";
         }
     }
+    
     $_SESSION['email_created'] = true;
     header("Location:index.php");
 }
