@@ -16,7 +16,8 @@ if(isset($_POST['submit'])){
           $errors = $functions->getErrors();
           foreach($errors as $error) {
               echo $error . "<br>";
-      }}else{
+      }
+     }else{
         echo "<script> alert('Your message has been received!') </script>";
       }
     }else{

@@ -72,7 +72,7 @@ if(isset($_POST["submit"])){
 //HTML COD 
 ?>
 <style>
-    h2 {
+  .form h2 {
     text-align: center;
     color: #333333;
   }

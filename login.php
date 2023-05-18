@@ -47,7 +47,7 @@ if(isset($_POST["submit"])){
 ?>
 
 <style>
-   h2 {
+   .form h2 {
     text-align: center;
     color: #333333;
   }
